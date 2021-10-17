@@ -13,8 +13,9 @@
 
 
 
-//Librerias necesarias
+//LIBRERIAS NECESARIAS
 #include <Servo.h>
+#include <Wire.h>
 
 
 /*DECLARACION DE OBJETOS DE TIPO SERVO*/
@@ -48,6 +49,9 @@ byte resta_pinza = 4;
 
 void setup() {
 
+  /*INCIAMOS INTERFAZ I2C COMO MAESTRO*/
+  Wire.begin();
+
   /*INICIALIZACION DE SERVOMOTORES*/
   hombro.attach(6, 1000, 2000);
   base.attach(7, 1000, 2000);
@@ -70,6 +74,13 @@ void loop() {
 
   /*-----ENTRAR CONTROLAR EL BRAZO DE MANERA MANUAL------*/
   if (digitalRead(operacion) == 1){
+    
+    /*ENVIAR MENSAJE AL ESCLAVO 1*/
+    Wire.beginTransmission(1);
+    Wire.write(1);
+    Wire.endTransmission();
+
+    /*ENTRAR AL MODO MANUAL*/
     manual();    
   }
   /*-----------------------------------------------------*/
@@ -77,7 +88,16 @@ void loop() {
 
   /*-------ENTRAR A RUTINA PREPROGRAMA DEL BRAZO--------*/
   if(digitalRead(operacion) == 0){
+
+    /*ENVIAR MENSAJE AL ESCLAVO 1*/
+    Wire.beginTransmission(1);
+    Wire.write(0);
+    Wire.endTransmission();
+
+    /*HACER QUE EL BRAZO VUELVA A SU POSICION HOME*/
     inicial();
+
+    /*HACER QUE EL BRAZO HAGA LA TAREA PARA LA QUE FUE PROGRAMADO*/
   }
 
 }
