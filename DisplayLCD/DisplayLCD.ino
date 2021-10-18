@@ -47,16 +47,16 @@ void datoEntrante(){
 
     if(dato == 0){
       lcd.clear();
-      lcd.setCursor(4,0);
+      lcd.setCursor(6,0);
       lcd.print("Modo:");
       lcd.setCursor(3,1);
       lcd.print("Automatico");
     }
     if(dato == 1){
       lcd.clear();
-      lcd.setCursor(4,0);
+      lcd.setCursor(6,0);
       lcd.print("Modo:");
-      lcd.setCursor(4,1);
+      lcd.setCursor(5,1);
       lcd.print("Manual");
     }
   }

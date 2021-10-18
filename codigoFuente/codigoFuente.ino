@@ -68,6 +68,9 @@ void setup() {
   pinMode(resta_pinza, INPUT);
   pinMode(operacion, INPUT);
 
+  /*HACEMOS QUE EL BRAZO VAYA A SU POSICION HOME*/
+  inicial();
+
 }
 
 void loop() {
@@ -98,6 +101,8 @@ void loop() {
     inicial();
 
     /*HACER QUE EL BRAZO HAGA LA TAREA PARA LA QUE FUE PROGRAMADO*/
+    automacito();
+    
   }
 
 }
@@ -169,16 +174,16 @@ void manual(){
     if (digitalRead(suma_manoY) == LOW){
       p_manoY++;
       delay(7);
-      if (p_manoY > 170){
-        p_manoY = 170;
+      if (p_manoY > 178){
+        p_manoY = 178;
       }
       manoY.write(p_manoY);
     }
     if (digitalRead(resta_manoY) == LOW){
       p_manoY--;
       delay(7);
-      if (p_manoY < 10){
-        p_manoY = 10;
+      if (p_manoY < 2){
+        p_manoY = 2;
       }
       manoY.write(p_manoY);
     }
@@ -198,8 +203,8 @@ void manual(){
     if (digitalRead(resta_pinza) == LOW){
       p_pinza--;
       delay(7);
-      if (p_pinza < 10){
-        p_pinza = 10;
+      if (p_pinza < 5){
+        p_pinza = 5;
       }
       pinza.write(p_pinza);
     }
@@ -321,3 +326,100 @@ void inicial(){
   /*---------------------------------------------------*/
 }
 /*------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+void automacito(){
+  while (true){
+
+    /*------------------BASE------------------*/
+    for(p_base; p_base < 170; p_base++){
+      base.write(p_base);
+      delay(15);
+    }
+    /*----------------------------------------*/
+
+
+    /*-----------------HOMBRO----------------*/
+    for(p_hombro; p_hombro > 2; p_hombro--){
+      hombro.write(p_hombro);
+      delay(15);
+    }
+    /*---------------------------------------*/
+
+
+    /*-------------------CODO-----------------*/
+    for(p_codo; p_codo < 178; p_codo++){
+      codo.write(p_codo);
+      delay(15);
+    }
+    /*----------------------------------------*/ 
+
+
+    /*------------------PINZA-----------------*/
+    for(p_pinza; p_pinza > 4; p_pinza--){
+      pinza.write(p_pinza);
+      delay(15);
+    }
+    /*---------------------------------------*/
+
+
+    /*------------------CODO-----------------*/
+    for(p_codo; p_codo > 80;p_codo--){
+      codo.write(p_codo);
+      delay(15);
+    }
+    /*---------------------------------------*/
+
+
+    /*----------------HOMBRO-----------------*/
+    for(p_hombro; p_hombro < 80;p_hombro++){
+      hombro.write(p_hombro);
+      delay(15);
+    }
+    /*---------------------------------------*/
+
+
+    /*------------------BASE----------------*/
+    for(p_base; p_base > 2; p_base--){
+      base.write(p_base);
+      delay(15);
+    }
+    /*-------------------------------------*/
+
+
+    /*----------------HOMBRO-----------------*/
+    for(p_hombro; p_hombro > 10; p_hombro--){
+      hombro.write(p_hombro);
+      delay(15);
+    }
+    /*---------------------------------------*/
+
+
+    /*-----------------CODO-----------------*/
+    for(p_codo; p_codo < 178; p_codo++){
+      codo.write(p_codo);
+      delay(15);
+    }
+    /*--------------------------------------*/
+    
+
+    /*----------------PINZA-----------------*/
+    for(p_pinza; p_pinza < 90; p_pinza++){
+      pinza.write(p_pinza);
+      delay(15);
+    }
+    /*--------------------------------------*/
+
+
+    /*----------IR AL MODO MANUAL-----------*/
+    if(digitalRead(operacion) == HIGH){
+       break;  
+    }
+    /*--------------------------------------*/
+  }
+}
