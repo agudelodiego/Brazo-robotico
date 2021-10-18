@@ -11,6 +11,7 @@
 - 4 Resistenacias de 500 Ohs 
 - Display LCD 16x2(shield keypad)
 - Cables (MUCHOS cables)
+- Arduino Mega
 
 # Descripcion del proyecto
 El proyecto del brazo robotico cuenta con dos modos de operacion: Un modo automatico en el que el brazo realiza una tarea que fue previamente programada por el diseñador, y un modo manual, en el cual el brazo puede ser controlado por un operario mediante los Joisticks y los pulsadores. Tambien cuenta con un display LCD el cual le indica al operacio en que modo de operacion se encuentra el brazo. Si se desea cambiar la rutina que realiza el brazo en su modo automatico se deben de dirigir a archivo codigo fuente, para seguidamente dirigirse al apartado donde se encuentra declarada una funcion llamada automatico(), una vez puede modificar todo lo que se encuentre dentro de la funcion para asi conseguir que el brazo realice lo que usted como programador desee
